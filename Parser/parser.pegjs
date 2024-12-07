@@ -1,30 +1,34 @@
 
   // Definición de reglas en PeggyJS
  start 
-  = regla
- //------ 1. Regla ----------
- regla = left:term "=" right:reglaA { return right; }
+  = regla (nl  regla)*
+ //------ Regla General ----------
+ regla = identificador nl "=" _ seleccion nl ";"
 
- reglaA = left:term "=" right:reglaA { returnright; }
-        / left:term { return left; }
+// ----- Manejo de mas de una regla --------
+seleccion = expresionConcat (nl "/" nl expresionConcat)*
 
-// ----- 2. Expresion + --------
-expresionMas = left:erm "=" right:term "+" {  return right; }
+// ----- Concatenacion ----------
+ expresionConcat = expresion (_ expresion)*
 
-// ----- 3. expresión_1 expresión_2 ... expresión_n ----------
- expresionConcat = left:term "=" right:expresionConcatA { return right; }
+ expresion = expresionCuenatificada [?+*]?
 
- expresionConcatA = left:expresionConcatA right:term { return left + right; }
-                  / left:term { return right; }
-
- term
-    = left:number { return left; }
-    / left:identificador { return left; }
+ expresionCuenatificada = identificador
+                  / cadena
+                  / "("_ expresion _")"
+                  
 
 // ----------------------  expresiones regulares --------------------
 
-  number = [0-9]+ { return parseInt(text()); }
 
- _ = [ \t\r\n] //aqui _ es el nombre de la expresion 
+cadena
+    = "\"" ([^\"])* "\""
+   / "\'" ([^\"])* "\'"
 
-identificador = [a-zA-Z]+
+
+ _ = [ \t]* //aqui _ es el nombre de la expresion 
+
+identificador = [_a-z]i[_a-z0-9]i*
+
+nl "nueva linea"
+    = [ \t\r\n]*
