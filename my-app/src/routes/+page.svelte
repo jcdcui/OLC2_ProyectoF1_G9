@@ -6,10 +6,10 @@
     let editorText = "";
     let result = "";
   
-    // Define un tema personalizado para CodeMirror sin usar codemirror.css
+    
     let myTheme = EditorView.theme({
       "&": {
-        color: "green",
+        color: "white",
         backgroundColor: "#034",
         fontSize: "14px",
         fontFamily: "monospace",
