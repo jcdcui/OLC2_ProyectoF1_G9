@@ -1,9 +1,16 @@
 import * as Parser from "./peg-parser";
-export default function parseInput(input: string) {
+
+export default function parseInput(input: string): string {
     try {
-        Parser.parse(input);
+        const result = Parser.parse(input);
+        //return `Número de reglas: ${count}`;
+        //return JSON.stringify(count)
+        return `Gramatica Aceptada! Se han detectado ${result.length} reglas`
     } catch (e) {
-        return e as string;
+        if (e instanceof Error) {
+            return `Error: ${e.message}`;
+        } else {
+            return `Error desconocido: ${JSON.stringify(e)}`;
+        }
     }
-    return "Buen Trabajo"
 }
