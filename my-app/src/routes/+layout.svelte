@@ -3,6 +3,6 @@
 </script>
 
 <div class= "w-screen h-screen">
-  <h1>Parsing Expression Grammar</h1>
+  <h1>FortranPEG</h1>
 <slot />
 </div>
