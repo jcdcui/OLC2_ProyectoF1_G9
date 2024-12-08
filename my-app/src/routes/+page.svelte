@@ -44,7 +44,7 @@
   </script>
   
   <style>
-    .editor-container {
+    .editor-container   {
       padding: 1.25rem;
       display: flex;
       flex-direction: row;
@@ -68,15 +68,12 @@
       margin-left: 0.5rem;
       margin-right: 0.5rem;
       transition: all 0.3s ease-in-out;
-      background-color: #d1e7dd !important;
-      color: #0f5132 !important;
     }
 
     .text-red-500 {
-      background: #67B26F;  /* fallback for old browsers */
-      background: -webkit-linear-gradient(to right, #4ca2cd, #67B26F);  /* Chrome 10-25, Safari 5.1-6 */
-      background: linear-gradient(to right, #4ca2cd, #67B26F); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+      color : black ; 
+      font-family: "Archivo", sans-serif;
+      font-size: 25px; 
     }
 
 
