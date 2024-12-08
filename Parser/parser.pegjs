@@ -1,10 +1,9 @@
-
-  // Definición de reglas en PeggyJS
+// Definición de reglas en PeggyJS
  start 
   = regla (nl  regla)* 
 
  //------ Regla General ----------
- regla = identificador nl "=" _ seleccion nl ";" 
+ regla = identificador nl "=" nl seleccion nl ";" 
 // ----- Manejo de mas de una regla --------
 seleccion = expresionConcat (nl "/" nl expresionConcat)* 
 
@@ -16,12 +15,22 @@ seleccion = expresionConcat (nl "/" nl expresionConcat)*
  expresionCuenatificada = identificador 
                   / cadena 
                   / "("(_ expresion)*")" 
+                  /rangos
                   
 
 // ----------------------  expresiones regulares --------------------
 cadena
     = "\""([^"]*) "\"" 
     / "'" ([^']*) "'" 
+rangos
+	="[" caracteres+"]"
+caracteres
+	=  range
+
+range
+	=  [^[\]-] "-" [^[\]-]
+			/ [^[\]]+
+
 
 identificador = [_a-z]i[_a-z0-9]i* { return text(); }
 
