@@ -1,11 +1,12 @@
 // Definición de reglas en PeggyJS
  start 
-  = primera:regla+ nl {return primera;}
+  =  comments.* /nl primera:regla* 
+    
 
  //------ Regla General ----------
  regla = nl id:identificador nl cadena? nl "=" _ sel:seleccion nl (_ ";" _)? { return { type: "regla", id: id, sel: sel }; }
 // ----- Manejo de mas de una regla --------
-seleccion = primera:expresionConcat lista:(nl "/" nl expresionConcat)* { return [primera].concat(lista.map(r => r[3])); }
+seleccion = primera:expresionConcat comentario: comments lista:(nl "/" nl expresionConcat)* { return [primera].concat(lista.map(r => r[3])); }
 
 // ----- Concatenacion ----------
  expresionConcat = primera:expresionArranque lista:(_ expresionArranque)* { return [primera].concat(lista.map(r => r[1])); }
@@ -34,6 +35,11 @@ quanticador = [?+*]
                   
 
 // ----------------------  expresiones regulares ---pluc-----------------
+comments
+  = "//" content:([^\n]*) "\n"* 
+    /"/*" content:(nopermitido*) "*/" "\n"* 
+nopermitido
+  = [^*] / "*" [^/]
 cadena 
   = "\"" texto:([^"]*) "\"" { return texto.join(""); }
   / "'" texto:([^']*) "'" { return texto.join(""); }
