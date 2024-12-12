@@ -31,13 +31,8 @@ quanticador = [?+*]
                   / cad:cadena "i"? { return { type: "cadena", value: cad }; }
                   / "("_ sel:seleccion _")"  {return sel; }
                   /ran:rangos "i"? { return { type: "rango", value: ran }; }
-                  /gru:grupo { return { type:"grupo", value: gru }; }
-                  
 
 // ----------------------  expresiones regulares ---pluc-----------------
-grupo 
-  = "(" _ seleccion _ ")" {return seleccion;}
-  
 comments
   = "//" content:([^\n]*) "\n"* 
     /"/*" content:(nopermitido*) "*/" "\n"* 
